@@ -1,0 +1,3 @@
+(slack-slash
+ :files
+ ("custom-slash.el"))

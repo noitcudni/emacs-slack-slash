@@ -57,6 +57,7 @@
   (let ((fun-name (plist-get plist :fun-name))
         (command (plist-get plist :command))
         (channel-name (plist-get plist :channel-name))
+        (user-name (plist-get plist :user-name))
         (token (plist-get plist :token))
         (external-url (plist-get plist :external-url)))
     `(defun ,fun-name ()
@@ -66,6 +67,7 @@
                              (puthash 'token ,token query-data)
                              (puthash 'command ,command query-data)
                              (puthash 'channel_name ,channel-name query-data)
+                             (puthash 'user_name ,user-name query-data)
                              (puthash 'text cmd query-data)
                              (web-http-post
                               (lambda (con header data))

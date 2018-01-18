@@ -13,6 +13,7 @@ dotspacemacs-additional-packages '(
 (clj-slack-setup :fun-name my-clj-fun
                  :command "/clj"
                  :channel-name "clj"
+                 :username-name "self explanatory"
                  :token "command token goes here"
                  :external-url "Your external URL goes here"
                  )

@@ -62,22 +62,22 @@
         (external-url (plist-get plist :external-url)))
     `(defun ,fun-name ()
        (interactive)
-       (labels ((slash-cmd (cmd)
-                           (let ((query-data (make-hash-table :test 'equal)))
-                             (puthash 'token ,token query-data)
-                             (puthash 'command ,command query-data)
-                             (puthash 'channel_name ,channel-name query-data)
-                             (puthash 'user_name ,user-name query-data)
-                             (puthash 'text cmd query-data)
-                             (web-http-post
-                              (lambda (con header data))
-                              :url ,external-url
-                              :data query-data
-                              ))))
-        (save-excursion
-          (end-of-defun)
-          (backward-sexp)
-          (let ((sexp (thing-at-point 'sexp)))
-            (slash-cmd sexp))
-          )))
+       (cl-labels ((slash-cmd (cmd)
+                              (let ((query-data (make-hash-table :test 'equal)))
+                                (puthash 'token ,token query-data)
+                                (puthash 'command ,command query-data)
+                                (puthash 'channel_name ,channel-name query-data)
+                                (puthash 'user_name ,user-name query-data)
+                                (puthash 'text cmd query-data)
+                                (web-http-post
+                                 (lambda (con header data))
+                                 :url ,external-url
+                                 :data query-data
+                                 ))))
+         (save-excursion
+           (end-of-defun)
+           (backward-sexp)
+           (let ((sexp (thing-at-point 'sexp)))
+             (slash-cmd sexp))
+           )))
     ))

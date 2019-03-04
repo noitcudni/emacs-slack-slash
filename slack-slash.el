@@ -52,6 +52,31 @@
 ;;                  :external-url "URL"
 ;;                  )
 
+
+;; (request
+;;  "https://subs.swingeducation.com/clj"
+;;  :type "POST"
+;;  :parser 'json-read
+;;  :params '(("token" . "[token goes here]"
+;;            ("command" . "/norby-prod")
+;;            ("channel_name" . "prod")
+;;            ("user_name" . "Lih Chen (spacemacs)")
+;;            ("text" . "(+ 1 1)")
+;;            )
+;;  :success (cl-function
+;;            (lambda (&key data &allow-other-keys)
+;;              (message "I sent: %S" (assoc-default 'args data))))
+;;  )
+
+
+;;;###autoload
+(defun get-string-from-file (filePath)
+  "Return filePath's file content.
+   Shamelessly copied from http://ergoemacs.org/emacs/elisp_read_file_content.html"
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (string-trim (buffer-string))))
+
 ;;;###autoload
 (defmacro clj-slack-setup (&rest plist)
   (let ((fun-name (plist-get plist :fun-name))
